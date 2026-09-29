@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// role: "admin" atau "petugas"
+model User {
+  id           Int                  @id @default(autoincrement())
+  name         String
+  username     String?              @unique
+  email        String?              @unique
+  password     String
+  role         String               @default("petugas")
+  createdAt    DateTime             @default(now())
+  resetTokens  PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id        Int               @id @default(autoincrement())
+  name      String
+  category  String?
+  price     Int
+  stock     Int               @default(0)
+  image     String?
+  createdAt DateTime          @default(now())
+  items     TransactionItem[]
+}
+
+model Member {
+  id           Int           @id @default(autoincrement())
+  name         String
+  phone        String?
+  address      String?
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
+model Transaction {
+  id            Int               @id @default(autoincrement())
+  invoiceNo     String            @unique
+  cashierName   String
+  member        Member?           @relation(fields: [memberId], references: [id])
+  memberId      Int?
+  total         Int
+  paid          Int
+  change        Int
+  paymentMethod String            @default("tunai")
+  createdAt     DateTime          @default(now())
+  items         TransactionItem[]
+}
+
+model TransactionItem {
+  id            Int         @id @default(autoincrement())
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  transactionId Int
+  product       Product     @relation(fields: [productId], references: [id])
+  productId     Int
+  name          String
+  qty           Int
+  price         Int
+  subtotal      Int
+}
