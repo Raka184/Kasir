@@ -96,10 +96,10 @@ export default function ProductsPage() {
 
   return (
     <div className="p-4 sm:p-6">
-      <div className="mb-6 rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,#121212_0%,#2a1717_35%,#991b1b_100%)] p-6 text-white shadow-[0_20px_50px_rgba(127,29,29,0.35)]">
+      <div className="mb-6 rounded-[28px] bg-[linear-gradient(115deg,#7f1d1d_0%,#dc2626_62%,#fff1f2_100%)] p-6 text-white shadow-[0_16px_36px_rgba(127,29,29,0.16)]">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-red-100/80">Dashboard Admin</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-red-100/90">Dashboard Admin</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight">Produk</h1>
           </div>
           <button

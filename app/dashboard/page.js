@@ -8,6 +8,7 @@ import {
   Minus,
   Trash2,
   ShoppingBag,
+  ShoppingCart,
   Receipt,
   X,
   Printer,
@@ -204,16 +205,18 @@ export default function KasirPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.15),transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.08),transparent_35%),#120d0d] lg:h-screen lg:flex-row">
+    <div className="flex min-h-screen flex-col bg-[#fffafa] lg:h-screen lg:flex-row">
       <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-6 lg:overflow-hidden">
-        <div className="mb-5 rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,#141414_0%,#2a1717_35%,#991b1b_100%)] p-5 text-white shadow-[0_20px_50px_rgba(127,29,29,0.45)]">
+        <div className="mb-5 overflow-hidden rounded-[28px] bg-[linear-gradient(115deg,#7f1d1d_0%,#dc2626_62%,#fff1f2_100%)] p-5 text-white shadow-[0_16px_36px_rgba(127,29,29,0.18)] sm:p-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.28em] text-red-100/80">Point of Sale</p>
-              <h1 className="mt-2 text-3xl font-black tracking-tight">Kasir</h1>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-red-100/90">Clashmart <span className="mx-1 text-white">•</span> Point of Sale</p>
+              <h1 className="mt-2 text-3xl font-extrabold tracking-tight">Belanja nyaman, transaksi cepat.</h1>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-red-100 shadow-inner shadow-black/10">
-              <span className="font-medium text-white">{cart.length}</span> item dipilih
+            <div className="flex items-center gap-2 rounded-2xl border border-red-100 bg-white/90 px-3 py-2 text-sm font-semibold text-brand-900">
+              <ShoppingCart size={18} aria-hidden="true" />
+              <span>{cart.length}</span>
+              <span>Keranjang</span>
             </div>
           </div>
         </div>
@@ -238,7 +241,7 @@ export default function KasirPage() {
               onClick={() => setCategory(c)}
               className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition ${
                 category === c
-                  ? "bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/20"
+                  ? "bg-brand-600 text-white shadow-lg shadow-brand-500/20"
                   : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
               }`}
             >
@@ -264,9 +267,9 @@ export default function KasirPage() {
                   key={p.id}
                   onClick={() => addToCart(p)}
                   disabled={p.stock <= 0}
-                  className="group rounded-[28px] border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
+                  className="group rounded-[24px] border border-[#e5e9df] bg-white p-4 text-left shadow-[0_4px_14px_rgba(36,53,43,0.04)] transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-[0_14px_30px_rgba(36,53,43,0.10)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <div className="mb-3 flex h-24 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-brand-50 via-blue-50 to-indigo-50">
+                  <div className="mb-3 flex h-24 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-brand-50 via-white to-rose-100">
                     {p.image ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
@@ -289,7 +292,7 @@ export default function KasirPage() {
         </div>
       </div>
 
-      <div className="w-full border-t border-slate-200 bg-white/80 p-4 shadow-[0_0_30px_rgba(15,23,42,0.06)] backdrop-blur-sm sm:p-5 lg:w-[420px] lg:shrink-0 lg:border-l lg:border-t-0">
+      <div className="w-full border-t border-[#e5e9df] bg-white p-4 shadow-[-8px_0_30px_rgba(36,53,43,0.04)] sm:p-5 lg:w-[420px] lg:shrink-0 lg:border-l lg:border-t-0">
         <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800">
             <ShoppingBag size={18} className="text-brand-600" /> Keranjang
@@ -382,9 +385,9 @@ export default function KasirPage() {
                 <button
                   key={option.value}
                   onClick={() => setPaymentMethod(option.value)}
-                  className={`rounded-2xl border px-2 py-2 text-sm font-medium transition ${
+                  className={`rounded-xl border px-2 py-2 text-sm font-semibold transition ${
                     paymentMethod === option.value
-                      ? "border-brand-600 bg-brand-600 text-white shadow-lg shadow-brand-500/20"
+                          ? "border-brand-600 bg-brand-600 text-white shadow-md shadow-brand-500/20"
                       : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
                   }`}
                 >
@@ -445,7 +448,7 @@ export default function KasirPage() {
           <button
             onClick={handleCheckout}
             disabled={processing || cart.length === 0}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-600 to-indigo-600 px-4 py-3.5 font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:brightness-110 disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-600 px-4 py-3.5 font-bold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-700 disabled:opacity-50"
           >
             <Receipt size={18} />
             {processing ? "Memproses..." : "Bayar"}

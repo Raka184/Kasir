@@ -63,10 +63,10 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(239,68,68,0.3),transparent_25%),linear-gradient(135deg,#0b0b0b_0%,#1f1111_30%,#7f1d1d_100%)] px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.13),transparent_32%),linear-gradient(135deg,#ffffff_0%,#fffafa_55%,#fff1f2_100%)] px-4">
+      <div className="w-full max-w-md rounded-2xl border border-white bg-white p-8 shadow-[0_24px_60px_rgba(127,29,29,0.12)]">
         <div className="flex flex-col items-center mb-6">
-          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-red-600 to-black flex items-center justify-center mb-3">
+          <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-600">
             <Store className="text-white" size={28} />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Buat Password Baru</h1>
